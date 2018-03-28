@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Mobile Bills</title>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<br><br>
+	<div class="col-md-8">
+		<table class="table table-bordered table-striped" id="list_table">
+				<tr>
+					<th>Mobile Number</th>
+					<th>Phone Bill</th>
+				</tr>
+		</table>
+	</div>
+
+</body>
+</html>
+
+<script>
+		$(document).ready(function(){
+			$.getJSON("billJSON.json",function(data){
+				var list_data ='';
+				$.each(data,function(key,value){
+					var bill = value.bill;
+					var b = bill.toFixed(2);
+					list_data += '<tr>';
+					list_data += '<td>'+ value.mobileN+ '</td>';
+					list_data += '<td>'+ b + '</td>';
+					list_data += '</tr>';
+				});
+				$('#list_table').append(list_data);
+			});
+		});
+		
+	</script>
